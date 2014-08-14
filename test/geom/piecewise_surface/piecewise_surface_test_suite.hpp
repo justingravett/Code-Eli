@@ -1903,7 +1903,14 @@ class piecewise_surface_test_suite : public Test::Suite
 //          octave_print(1, ps);
 //        }
 
-        ps.find_interior_C0_edges(disc_ujoints, disc_vjoints);
+        ps.find_interior_CX_edges(disc_ujoints, disc_vjoints, eli::geom::general::C0 );
+        TEST_ASSERT(disc_ujoints.size()==disc_ujoints_ref.size());
+        TEST_ASSERT(disc_vjoints.size()==disc_vjoints_ref.size());
+        TEST_ASSERT(tol.approximately_equal(disc_ujoints[0], disc_ujoints_ref[0]));
+        TEST_ASSERT(tol.approximately_equal(disc_ujoints[1], disc_ujoints_ref[1]));
+        TEST_ASSERT(tol.approximately_equal(disc_vjoints[0], disc_vjoints_ref[0]));
+
+        ps.find_interior_CX_edges(disc_ujoints, disc_vjoints, eli::geom::general::G0 );
         TEST_ASSERT(disc_ujoints.size()==disc_ujoints_ref.size());
         TEST_ASSERT(disc_vjoints.size()==disc_vjoints_ref.size());
         TEST_ASSERT(tol.approximately_equal(disc_ujoints[0], disc_ujoints_ref[0]));
